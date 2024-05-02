@@ -1,12 +1,24 @@
 package main
 
 import (
-	"github.com/labstack/echo"
+	"bingo/server"
+	"fmt"
+	"os"
 )
 
 func main() {
-	e := echo.New()
-	if err := e.Start(":8080"); err != nil {
-		e.Logger.Fatal(err.Error())
+	portError := "Please provide a port number (format-> :8080)."
+
+	// Get the port from the command line
+	if len(os.Args) < 2 {
+		fmt.Println(portError)
+		return
 	}
+	port := os.Args[1]
+	if port == "" || port[0] != ':' {
+		fmt.Println(portError)
+		return
+	}
+
+	server.Run(port)
 }
