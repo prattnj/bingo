@@ -5,11 +5,13 @@ public class UserBean {
     private final String username;
     private final String password;
     private final String email;
+    private String token;
 
-    public UserBean(String username, String password, String email) {
+    public UserBean(String username, String password, String email, String token) {
         this.username = username;
         this.password = password;
         this.email = email;
+        this.token = token;
     }
 
     public String getUsername() {
@@ -22,5 +24,13 @@ public class UserBean {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }
