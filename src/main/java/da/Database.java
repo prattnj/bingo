@@ -37,6 +37,7 @@ CREATE TABLE IF NOT EXISTS board (
         String query = "CREATE DATABASE IF NOT EXISTS " + DB_NAME;
         try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {
             conn.prepareStatement(query).executeUpdate();
+            conn.setCatalog(DB_NAME);
             for (String s : schema) {
                 conn.prepareStatement(s).executeUpdate();
             }
