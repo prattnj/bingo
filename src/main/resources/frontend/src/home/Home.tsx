@@ -1,12 +1,19 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './Home.css';
+import {getToken} from "../util";
 
 function Home() {
-  return (
-    <div className="App">
+    useEffect(() => {
+        if (!getToken()) {
+            window.location.href = '/login'
+        }
+    }, [])
 
-    </div>
-  );
+    return (
+        <div>
+            home
+        </div>
+    );
 }
 
 export default Home;

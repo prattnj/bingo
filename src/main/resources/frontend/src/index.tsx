@@ -4,14 +4,22 @@ import './index.css';
 import Home from './home/Home';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
+import {BrowserRouter, Link, Route, Routes} from "react-router-dom";
+import {Login} from "./auth/Login";
+import {Register} from "./auth/Register";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-  <React.StrictMode>
-    <Home />
-  </React.StrictMode>
+    <BrowserRouter>
+        <Link to={'/'}><div className={'title'}><b>bingo</b></div></Link>
+        <Routes>
+            <Route path={'/'} element={<Home />}/>
+            <Route path={'/login'} element={<Login />}/>
+            <Route path={'/register'} element={<Register />}/>
+        </Routes>
+    </BrowserRouter>
 );
 
 // If you want your app to work offline and load faster, you can change
