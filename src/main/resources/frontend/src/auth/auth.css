@@ -1,0 +1,25 @@
+.auth-all {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.input-box {
+    padding: .5rem;
+    background-color: #1a1e1f;
+    margin-bottom: 1rem;
+    border: #dddddd 1px solid;
+    border-radius: .5rem;
+    color: #dddddd;
+}
+
+.button {
+    margin: 0 auto;
+    padding: .5rem;
+    background-color: #dd3dfd;
+    color: #1a1e1f;
+    border-radius: .2rem;
+    box-shadow: #dd3dfd 0 0 .2rem;
+}
