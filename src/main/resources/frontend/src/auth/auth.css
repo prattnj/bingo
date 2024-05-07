@@ -6,6 +6,20 @@
     text-align: center;
 }
 
+.button {
+    margin: 0 auto;
+    padding: .5rem;
+    background-color: #dd3dfd;
+    color: #1a1e1f;
+    border-radius: .2rem;
+    box-shadow: #dd3dfd 0 0 .2rem;
+}
+
+.error {
+    color: #cc3333;
+    margin-bottom: .5rem;
+}
+
 .input-box {
     padding: .5rem;
     background-color: #1a1e1f;
@@ -15,11 +29,6 @@
     color: #dddddd;
 }
 
-.button {
-    margin: 0 auto;
-    padding: .5rem;
-    background-color: #dd3dfd;
-    color: #1a1e1f;
-    border-radius: .2rem;
-    box-shadow: #dd3dfd 0 0 .2rem;
+.input-box:focus {
+    outline: none;
 }
