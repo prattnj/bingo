@@ -8,14 +8,15 @@ import model.response.AuthResponse;
 import model.response.BaseResponse;
 import spark.Request;
 import spark.Response;
+import spark.Spark;
 
 import java.util.UUID;
 
 public class AuthHandler {
 
-    public static Object register(Request req, Response res) {
-        Gson gson = new Gson();
+    private static final Gson gson = new Gson();
 
+    public static Object register(Request req, Response res) {
         try {
             AuthRequest request = gson.fromJson(req.body(), AuthRequest.class);
 
@@ -41,13 +42,11 @@ public class AuthHandler {
             return gson.toJson(new AuthResponse(request.username(), token));
         } catch (Exception e) {
             res.status(500);
-            return null;
+            return "{}";
         }
     }
 
     public static Object login(Request req, Response res) {
-        Gson gson = new Gson();
-
         try {
             AuthRequest request = gson.fromJson(req.body(), AuthRequest.class);
 
@@ -74,7 +73,16 @@ public class AuthHandler {
             return gson.toJson(new AuthResponse(user.getUsername(), token));
         } catch (Exception e) {
             res.status(500);
-            return gson.toJson(new BaseResponse("Server error"));
+            return "{}";
+        }
+    }
+
+    public static void verifyAuthentication(Request req) {
+        try {
+            String token = req.headers("Authentication");
+            if (token == null || UserDAO.getUserByToken(token) == null) Spark.halt(401);
+        } catch (Exception e) {
+            Spark.halt(500);
         }
     }
 }
