@@ -13,6 +13,12 @@ public class Server {
 
             Spark.port(port);
 
+            Spark.before((_, response) -> {
+                response.header("Access-Control-Allow-Origin", "*");
+                response.header("Access-Control-Request-Method", "*");
+                response.header("Access-Control-Allow-Headers", "*");
+            });
+
             Spark.path("/auth", () -> {
                 Spark.post("/register", Handler::handleRegister);
                 Spark.post("/login", Handler::handleLogin);
