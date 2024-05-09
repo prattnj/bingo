@@ -13,7 +13,7 @@ import java.util.UUID;
 
 public class AuthHandler {
 
-    public static Object handleRegister(Request req, Response res) {
+    public static Object register(Request req, Response res) {
         Gson gson = new Gson();
 
         try {
@@ -45,7 +45,7 @@ public class AuthHandler {
         }
     }
 
-    public static Object handleLogin(Request req, Response res) {
+    public static Object login(Request req, Response res) {
         Gson gson = new Gson();
 
         try {

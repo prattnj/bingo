@@ -20,12 +20,16 @@ public class Server {
             });
 
             Spark.path("/auth", () -> {
-                Spark.post("/register", Handler::handleRegister);
-                Spark.post("/login", Handler::handleLogin);
+                Spark.post("/user", AuthHandler::register);
+                Spark.post("/session", AuthHandler::login);
+                // Spark.delete("/session", null); // logout
             });
 
             Spark.path("/api", () -> {
-
+                Spark.get("/board", BoardHandler::list);
+                Spark.post("/board", BoardHandler::create);
+                Spark.put("/board", BoardHandler::update);
+                Spark.delete("/board", BoardHandler::delete);
             });
 
             Database.createDatabase();
