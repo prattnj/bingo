@@ -11,7 +11,7 @@ import spark.Response;
 
 import java.util.UUID;
 
-public class Handler {
+public class AuthHandler {
 
     public static Object handleRegister(Request req, Response res) {
         Gson gson = new Gson();
