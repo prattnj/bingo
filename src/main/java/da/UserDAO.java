@@ -34,21 +34,23 @@ public class UserDAO {
 
     public static UserBean getUser(String username) throws SQLException {
         String query = "SELECT * FROM user WHERE username = ?";
-        try (Connection conn = Database.getConnection()) {
-            PreparedStatement ps = conn.prepareStatement(query);
-            ps.setString(1, username);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                return new UserBean(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));
-            } else return null;
-        }
+        return getUserByString(query, username);
     }
 
     public static UserBean getUserByEmail(String email) throws SQLException {
         String query = "SELECT * FROM user WHERE email = ?";
+        return getUserByString(query, email);
+    }
+
+    public static UserBean getUserByToken(String token) throws SQLException {
+        String query = "SELECT * FROM user WHERE token = ?";
+        return getUserByString(query, token);
+    }
+
+    private static UserBean getUserByString(String query, String key) throws SQLException {
         try (Connection conn = Database.getConnection()) {
             PreparedStatement ps = conn.prepareStatement(query);
-            ps.setString(1, email);
+            ps.setString(1, key);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 return new UserBean(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));
