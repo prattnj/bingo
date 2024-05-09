@@ -13,7 +13,11 @@ public class BoardHandler {
         return null;
     }
 
-    public static Object list(Request req, Response res) {
+    public static Object listAll(Request req, Response res) {
+        return null;
+    }
+
+    public static Object listMine(Request req, Response res) {
         return null;
     }
 

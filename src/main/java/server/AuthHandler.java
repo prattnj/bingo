@@ -23,7 +23,7 @@ public class AuthHandler {
             // validate request
             if (request.username() == null || request.password() == null || request.email() == null) {
                 res.status(400);
-                return null;
+                return "{}";
             }
 
             // validate username, email
@@ -53,7 +53,7 @@ public class AuthHandler {
             // validate request
             if (request.username() == null || request.password() == null) {
                 res.status(400);
-                return null;
+                return "{}";
             }
 
             // validate username, password
@@ -80,7 +80,8 @@ public class AuthHandler {
     public static void verifyAuthentication(Request req) {
         try {
             String token = req.headers("Authentication");
-            if (token == null || UserDAO.getUserByToken(token) == null) Spark.halt(401);
+            if (token == null || UserDAO.getUserByToken(token) == null)
+                Spark.halt(401, gson.toJson(new BaseResponse("Invalid token")));
         } catch (Exception e) {
             Spark.halt(500);
         }

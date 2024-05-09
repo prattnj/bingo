@@ -26,10 +26,10 @@ public class Server {
             });
 
             Spark.path("/api", () -> {
-                Spark.get("/board", BoardHandler::list);
-
                 Spark.before("/*", (req, _) -> AuthHandler.verifyAuthentication(req));
 
+                Spark.get("/board/all", BoardHandler::listAll);
+                Spark.get("/board", BoardHandler::listMine);
                 Spark.post("/board", BoardHandler::create);
                 Spark.put("/board", BoardHandler::update);
                 Spark.delete("/board", BoardHandler::delete);
