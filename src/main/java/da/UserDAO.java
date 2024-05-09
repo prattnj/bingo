@@ -22,8 +22,14 @@ public class UserDAO {
         }
     }
 
-    public static void updateUser(UserBean user) throws SQLException {
-        insertUser(user);
+    public static void updateToken(String username, String token) throws SQLException {
+        String query = "UPDATE user SET token = ? WHERE username = ?";
+        try (Connection conn = Database.getConnection()) {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, token);
+            ps.setString(2, username);
+            ps.executeUpdate();
+        }
     }
 
     public static UserBean getUser(String username) throws SQLException {

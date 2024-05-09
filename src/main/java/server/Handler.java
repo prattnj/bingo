@@ -69,8 +69,7 @@ public class Handler {
             }
 
             String token = UUID.randomUUID().toString();
-            user.setToken(token);
-            UserDAO.updateUser(user);
+            UserDAO.updateToken(user.getUsername(), token);
             res.status(200);
             return gson.toJson(new AuthResponse(user.getUsername(), token));
         } catch (Exception e) {
