@@ -27,17 +27,17 @@ public class AuthHandler {
             }
 
             // validate username, email
-            if (UserDAO.getUser(request.username()) != null) {
+            if (UserDAO.get(request.username()) != null) {
                 res.status(409);
                 return gson.toJson(new BaseResponse("Username taken"));
             }
-            if (UserDAO.getUserByEmail(request.email()) != null) {
+            if (UserDAO.getByEmail(request.email()) != null) {
                 res.status(409);
                 return gson.toJson(new BaseResponse("Email taken"));
             }
 
             String token = UUID.randomUUID().toString();
-            UserDAO.insertUser(new UserBean(request.username(), request.password(), request.email(), token));
+            UserDAO.insert(new UserBean(request.username(), request.password(), request.email(), token));
             res.status(200);
             return gson.toJson(new AuthResponse(request.username(), token));
         } catch (Exception e) {
@@ -57,7 +57,7 @@ public class AuthHandler {
             }
 
             // validate username, password
-            UserBean user = UserDAO.getUser(request.username());
+            UserBean user = UserDAO.get(request.username());
             if (user == null) {
                 res.status(401);
                 return gson.toJson(new BaseResponse("Invalid username"));
@@ -80,7 +80,7 @@ public class AuthHandler {
     public static void verifyAuthentication(Request req) {
         try {
             String token = req.headers("Authentication");
-            if (token == null || UserDAO.getUserByToken(token) == null)
+            if (token == null || UserDAO.getByToken(token) == null)
                 Spark.halt(401, gson.toJson(new BaseResponse("Invalid token")));
         } catch (Exception e) {
             Spark.halt(500);

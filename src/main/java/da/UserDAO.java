@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 public class UserDAO {
 
-    public static void insertUser(UserBean user) throws SQLException {
+    public static void insert(UserBean user) throws SQLException {
         String query = "INSERT INTO user (username, password, email, token) VALUES (?, ?, ?, ?)";
         try (Connection conn = Database.getConnection()) {
             PreparedStatement ps = conn.prepareStatement(query);
@@ -32,17 +32,17 @@ public class UserDAO {
         }
     }
 
-    public static UserBean getUser(String username) throws SQLException {
+    public static UserBean get(String username) throws SQLException {
         String query = "SELECT * FROM user WHERE username = ?";
         return getUserByString(query, username);
     }
 
-    public static UserBean getUserByEmail(String email) throws SQLException {
+    public static UserBean getByEmail(String email) throws SQLException {
         String query = "SELECT * FROM user WHERE email = ?";
         return getUserByString(query, email);
     }
 
-    public static UserBean getUserByToken(String token) throws SQLException {
+    public static UserBean getByToken(String token) throws SQLException {
         String query = "SELECT * FROM user WHERE token = ?";
         return getUserByString(query, token);
     }
@@ -59,7 +59,7 @@ public class UserDAO {
     }
 
     public static boolean validatePassword(String username, String password) throws SQLException {
-        UserBean user = getUser(username);
+        UserBean user = get(username);
         if (user == null) return false;
         return BCrypt.checkpw(password, user.getPassword());
     }
