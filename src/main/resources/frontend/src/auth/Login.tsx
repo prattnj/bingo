@@ -19,7 +19,18 @@ export const Login = () => {
 
     const validateAndLogin = () => {
         if (!validateFields()) return;
-        login(username, password);
+        login(username, password).then(r => {
+            if (!r) {
+                // server error
+                setErrorMessage('Server error, try again later.');
+            } else if (r.message) {
+                // 4xx
+                setErrorMessage(r.message);
+            } else {
+                // success
+                window.location.href = '/';
+            }
+        });
     };
 
     return (

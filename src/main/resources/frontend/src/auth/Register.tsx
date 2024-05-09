@@ -23,7 +23,18 @@ export const Register = () => {
 
     const validateAndRegister = () => {
         if (!validateFields()) return;
-        register(username, password, email);
+        register(username, password, email).then(r => {
+            if (!r) {
+                // server error
+                setErrorMessage('Server error, try again later.');
+            } else if (r.message) {
+                // 4xx
+                setErrorMessage(r.message);
+            } else {
+                // success
+                window.location.href = '/';
+            }
+        });
     };
 
     return (
