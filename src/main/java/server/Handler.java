@@ -74,7 +74,7 @@ public class Handler {
             return gson.toJson(new AuthResponse(user.getUsername(), token));
         } catch (Exception e) {
             res.status(500);
-            return null;
+            return gson.toJson(new BaseResponse("Server error"));
         }
     }
 }
