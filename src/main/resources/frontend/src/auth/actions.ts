@@ -3,14 +3,14 @@ import {setToken} from "../util";
 const host = 'http://localhost:8081'
 
 export const login = async (username: string, password: string) => {
-    return makeRequest('/auth/login', {
+    return makeRequest('/auth/session', {
         username: username,
         password: password,
     });
 }
 
 export const register = (username: string, password: string, email: string) => {
-    return makeRequest('/auth/register', {
+    return makeRequest('/auth/user', {
         username: username,
         password: password,
         email: email,
@@ -27,7 +27,7 @@ const makeRequest = async (endpoint: string, body: object) => {
         if (!response.ok) {
             if (response.status === 500) return null;
         } else {
-            setToken(data.token)
+            setToken(data.token);
         }
         return data
     } catch (error) {
