@@ -23,6 +23,7 @@ CREATE TABLE IF NOT EXISTS user (
 """, """
 CREATE TABLE IF NOT EXISTS board (
     id VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL,
     username VARCHAR(255) NOT NULL,
     items TEXT NOT NULL,
     created_at BIGINT NOT NULL,
