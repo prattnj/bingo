@@ -1,13 +1,17 @@
 package service;
 
 import da.BoardDAO;
+import da.UserDAO;
 import model.bean.BoardBean;
 import model.exception.BadRequestException;
 import model.exception.ConflictException;
+import model.exception.ForbiddenException;
 import model.exception.NotFoundException;
 import model.request.BaseRequest;
 import model.request.WriteBoardRequest;
 import model.response.BaseResponse;
+
+import java.util.Objects;
 
 public class BoardService {
     public static class Create extends Service {
@@ -39,6 +43,10 @@ public class BoardService {
 
             // validate id
             if (BoardDAO.get(request.id()) == null) throw new NotFoundException("Board doesn't exist");
+
+            // make sure it's your board
+            if (!Objects.equals(request.username(), UserDAO.getByToken(token).username()))
+                throw new ForbiddenException("This board isn't yours");
 
             BoardDAO.update(new BoardBean(request.id(), request.name(), request.username(), request.items(),
                     request.createdAt(), request.isPublic()));
