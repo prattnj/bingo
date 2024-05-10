@@ -59,6 +59,15 @@ public class BoardDAO {
         return getMultipleBoards(query, "1");
     }
 
+    public static void delete(String id) throws SQLException {
+        String query = "DELETE FROM board WHERE id = ?";
+        try (Connection conn = Database.getConnection()) {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, id);
+            ps.executeUpdate();
+        }
+    }
+
     private static Collection<BoardBean> getMultipleBoards(String query, String key) throws SQLException {
         Collection<BoardBean> boards = new HashSet<>();
         try (Connection conn = Database.getConnection()) {
