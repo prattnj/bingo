@@ -74,10 +74,10 @@ public class AuthHandler {
             }
 
             String token = UUID.randomUUID().toString();
-            UserDAO.updateToken(user.getUsername(), token);
+            UserDAO.updateToken(user.username(), token);
 
             res.status(200);
-            return gson.toJson(new AuthResponse(user.getUsername(), token));
+            return gson.toJson(new AuthResponse(user.username(), token));
         } catch (JsonSyntaxException e) {
             res.status(400);
             return DEFAULT_RETURN;

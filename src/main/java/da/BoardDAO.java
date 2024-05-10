@@ -17,10 +17,10 @@ public class BoardDAO {
         String query = "INSERT INTO board (id, name, username, items, created_at, public) VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection conn = Database.getConnection()) {
             PreparedStatement ps = conn.prepareStatement(query);
-            ps.setString(1, board.getId());
-            ps.setString(2, board.getUsername());
-            ps.setString(3, new Gson().toJson(board.getItems()));
-            ps.setLong(4, board.getCreatedAt());
+            ps.setString(1, board.id());
+            ps.setString(2, board.username());
+            ps.setString(3, new Gson().toJson(board.items()));
+            ps.setLong(4, board.createdAt());
             ps.setBoolean(5, board.isPublic());
             ps.executeUpdate();
         }
@@ -30,10 +30,10 @@ public class BoardDAO {
         String query = "UPDATE board SET name = ?, items = ?, public = ? WHERE id = ?";
         try (Connection conn = Database.getConnection()) {
             PreparedStatement ps = conn.prepareStatement(query);
-            ps.setString(1, board.getName());
-            ps.setString(2, new Gson().toJson(board.getItems()));
+            ps.setString(1, board.name());
+            ps.setString(2, new Gson().toJson(board.items()));
             ps.setBoolean(3, board.isPublic());
-            ps.setString(4, board.getId());
+            ps.setString(4, board.id());
             ps.executeUpdate();
         }
     }

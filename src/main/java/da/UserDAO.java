@@ -14,10 +14,10 @@ public class UserDAO {
         String query = "INSERT INTO user (username, password, email, token) VALUES (?, ?, ?, ?)";
         try (Connection conn = Database.getConnection()) {
             PreparedStatement ps = conn.prepareStatement(query);
-            ps.setString(1, user.getUsername());
-            ps.setString(2, BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
-            ps.setString(3, user.getEmail());
-            ps.setString(4, user.getToken());
+            ps.setString(1, user.username());
+            ps.setString(2, BCrypt.hashpw(user.password(), BCrypt.gensalt()));
+            ps.setString(3, user.email());
+            ps.setString(4, user.token());
             ps.executeUpdate();
         }
     }
@@ -61,6 +61,6 @@ public class UserDAO {
     public static boolean validatePassword(String username, String password) throws SQLException {
         UserBean user = get(username);
         if (user == null) return false;
-        return BCrypt.checkpw(password, user.getPassword());
+        return BCrypt.checkpw(password, user.password());
     }
 }
