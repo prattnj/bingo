@@ -16,6 +16,7 @@ import java.util.UUID;
 public class AuthHandler {
 
     private static final Gson gson = new Gson();
+    private static final Object DEFAULT_RETURN = "{}";
 
     public static Object register(Request req, Response res) {
         try {
@@ -24,7 +25,7 @@ public class AuthHandler {
             // validate request
             if (request.username() == null || request.password() == null || request.email() == null) {
                 res.status(400);
-                return "{}";
+                return DEFAULT_RETURN;
             }
 
             // validate username, email
@@ -43,10 +44,10 @@ public class AuthHandler {
             return gson.toJson(new AuthResponse(request.username(), token));
         } catch (JsonSyntaxException e) {
             res.status(400);
-            return "{}";
+            return DEFAULT_RETURN;
         } catch (Exception e) {
             res.status(500);
-            return "{}";
+            return DEFAULT_RETURN;
         }
     }
 
@@ -57,7 +58,7 @@ public class AuthHandler {
             // validate request
             if (request.username() == null || request.password() == null) {
                 res.status(400);
-                return "{}";
+                return DEFAULT_RETURN;
             }
 
             // validate username, password
@@ -77,10 +78,10 @@ public class AuthHandler {
             return gson.toJson(new AuthResponse(user.getUsername(), token));
         } catch (JsonSyntaxException e) {
             res.status(400);
-            return "{}";
+            return DEFAULT_RETURN;
         } catch (Exception e) {
             res.status(500);
-            return "{}";
+            return DEFAULT_RETURN;
         }
     }
 
