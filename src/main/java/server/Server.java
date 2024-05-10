@@ -2,10 +2,7 @@ package server;
 
 import com.google.gson.JsonSyntaxException;
 import da.Database;
-import model.exception.BadRequestException;
-import model.exception.ConflictException;
-import model.exception.ServerErrorException;
-import model.exception.UnauthorizedException;
+import model.exception.*;
 import model.request.AuthRequest;
 import model.request.WriteBoardRequest;
 import service.AuthService;
@@ -62,6 +59,10 @@ public class Server {
         });
         Spark.exception(UnauthorizedException.class, (e, _, res) -> {
             res.status(401);
+            res.body(Handler.newResponse(e.getMessage()));
+        });
+        Spark.exception(ForbiddenException.class, (e, _, res) -> {
+            res.status(403);
             res.body(Handler.newResponse(e.getMessage()));
         });
         Spark.exception(ConflictException.class, (e, _, res) -> {
