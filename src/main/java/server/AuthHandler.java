@@ -1,6 +1,7 @@
 package server;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import da.UserDAO;
 import model.bean.UserBean;
 import model.request.AuthRequest;
@@ -40,6 +41,9 @@ public class AuthHandler {
             UserDAO.insert(new UserBean(request.username(), request.password(), request.email(), token));
             res.status(200);
             return gson.toJson(new AuthResponse(request.username(), token));
+        } catch (JsonSyntaxException e) {
+            res.status(400);
+            return "{}";
         } catch (Exception e) {
             res.status(500);
             return "{}";
@@ -71,6 +75,9 @@ public class AuthHandler {
             UserDAO.updateToken(user.getUsername(), token);
             res.status(200);
             return gson.toJson(new AuthResponse(user.getUsername(), token));
+        } catch (JsonSyntaxException e) {
+            res.status(400);
+            return "{}";
         } catch (Exception e) {
             res.status(500);
             return "{}";
