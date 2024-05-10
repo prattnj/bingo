@@ -40,6 +40,7 @@ public class AuthHandler {
 
             String token = UUID.randomUUID().toString();
             UserDAO.insert(new UserBean(request.username(), request.password(), request.email(), token));
+
             res.status(200);
             return gson.toJson(new AuthResponse(request.username(), token));
         } catch (JsonSyntaxException e) {
@@ -74,6 +75,7 @@ public class AuthHandler {
 
             String token = UUID.randomUUID().toString();
             UserDAO.updateToken(user.getUsername(), token);
+
             res.status(200);
             return gson.toJson(new AuthResponse(user.getUsername(), token));
         } catch (JsonSyntaxException e) {
