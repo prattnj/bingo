@@ -6,10 +6,10 @@ public class BoardBean {
     private final String name;
     private final String username;
     private final Item[][] items;
-    private final long createdAt;
-    private final boolean isPublic;
+    private final Long createdAt;
+    private final Boolean isPublic;
 
-    public BoardBean(String id, String name, String username, Item[][] items, long createdAt, boolean isPublic) {
+    public BoardBean(String id, String name, String username, Item[][] items, Long createdAt, Boolean isPublic) {
         this.id = id;
         this.name = name;
         this.username = username;
@@ -34,11 +34,11 @@ public class BoardBean {
         return items;
     }
 
-    public long getCreatedAt() {
+    public Long getCreatedAt() {
         return createdAt;
     }
 
-    public boolean isPublic() {
+    public Boolean isPublic() {
         return isPublic;
     }
 }
