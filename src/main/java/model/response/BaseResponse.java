@@ -2,7 +2,9 @@ package model.response;
 
 public class BaseResponse {
 
-    private final String message;
+    private String message;
+
+    public BaseResponse() {}
 
     public BaseResponse(String message) {
         this.message = message;
