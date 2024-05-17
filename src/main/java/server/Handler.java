@@ -1,15 +1,9 @@
 package server;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
-import da.BoardDAO;
 import da.UserDAO;
-import model.bean.BoardBean;
-import model.exception.BadRequestException;
-import model.exception.ConflictException;
 import model.request.BaseRequest;
 import model.response.BaseResponse;
-import service.AuthService;
 import service.Service;
 import spark.Request;
 import spark.Response;
