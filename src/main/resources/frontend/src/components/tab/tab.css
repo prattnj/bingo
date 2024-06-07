@@ -1,0 +1,48 @@
+.tabs-all {
+    width: 100%;
+}
+
+.tabs-selected {
+    background-color: #dd3dfd;
+}
+
+.tabs-tab {
+    padding: .5rem;
+    border-radius: .5rem;
+    text-align: center;
+}
+
+.tabs-tabs {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 90%;
+    border: #dddddd 1px solid;
+    border-radius: .5rem;
+    padding: .25rem;
+    margin: 0 auto 1rem;
+}
+
+.tabs-unselected {
+
+}
+
+.tw-1 {
+    width: 100%;
+}
+
+.tw-2 {
+    width: 50%;
+}
+
+.tw-3 {
+    width: 33%;
+}
+
+.tw-4 {
+    width: 25%;
+}
+
+.tw-5 {
+    width: 20%;
+}
